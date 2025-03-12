@@ -1,6 +1,6 @@
 import express from "express";
 const route = express.Router();
-import { CreateHelp, GetHelps, GetHelpByID, FindHelp, UpdateHelp, DeleteHelp } from "../../controller/Frontend/Help.Controller.js";
+import { CreateHelp, GetHelps, GetHelpBySeekerID, FindHelp, UpdateHelp, DeleteHelp } from "../../controller/Frontend/Help.Controller.js";
 import { upload } from "../../Helpers/multer.js";
 import { body } from "express-validator";
 
@@ -17,7 +17,9 @@ route.post("/create-help", upload.array("gallery", 5),                          
 
 route.get("/get-help", GetHelps);
 
-route.get("/get-help/:id", GetHelpByID);
+
+route.get("/get-seekerhelp/:seekerId", GetHelpBySeekerID);
+
 
 route.post("/find-help", FindHelp);                                                       // Find Help By Id
 
@@ -34,5 +36,6 @@ route.post("/update-help/:id", upload.array("gallery", 5),                      
     UpdateHelp)
 
 route.delete("/delete-help/:id", DeleteHelp);                                                   // Delete Help
+
 
 export default route;

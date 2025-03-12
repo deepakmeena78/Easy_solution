@@ -151,19 +151,25 @@ export const GetHelps = async (req, res) => {
 
 
 
-export const GetHelpByID = async (req, res) => {
+export const GetHelpBySeekerID = async (req, res) => {
     try {
-        const id = req.params.id;
-        let result = await HelpModule.findById(id);
-        if (!result) {
-            return res.status(404).json({ Err: "Data Is Not available" });
+        const help_seeker = req.params.seekerId;
+
+        const result = await HelpModule.find({ help_seeker })
+            .populate("category") // Populate category field
+            .exec(); // Execute the query
+
+        if (result.length === 0) {
+            return res.status(404).json({ error: "No help requests found" });
         }
-        return res.status(201).json({ msg: "Data Get Successfully : ", result });
+
+        return res.status(200).json({ message: "Data fetched successfully", result });
     } catch (error) {
-        console.log(error);
-        return res.status(500).json({ msg: "Error Get Data ", error });
+        console.error("Error fetching data:", error);
+        return res.status(500).json({ message: "Error fetching data", error });
     }
-}
+};
+
 
 
 

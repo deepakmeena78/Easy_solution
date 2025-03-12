@@ -55,7 +55,8 @@ const Categories = () => {
                     >
                         {categories.length > 0 ? (
                             categories.map((data, index) => (
-                                <SwiperSlide key={index}>
+          
+          <SwiperSlide key={index}>
                                     <div className="bg-white shadow-lg rounded-lg p-4 text-center border border-gray-300 transition-all duration-300 hover:border-[var(--dark-blue)] hover:scale-105 hover:shadow-[0px_3px_8px_rgba(0,0,0,0.24)]">
                                         <img
                                             src={data.gallery}
