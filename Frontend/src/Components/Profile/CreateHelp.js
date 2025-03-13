@@ -43,6 +43,28 @@ function CreateHelp() {
   const helpDateRef = useRef(null);
   const galleryRef = useRef(null);
 
+  const [errors, setErrors] = useState({});
+
+  const validateForm = () => {
+    let newErrors = {};
+
+    if (!titleRef.current.value.trim()) newErrors.title = "Title is required";
+    if (!descriptionRef.current.value.trim()) newErrors.description = "Description is required";
+    if (!categoryRef.current.value.trim()) newErrors.category = "Category is required";
+    if (!locationRef.current.value.trim()) newErrors.location = "Location is required";
+    if (!pincodeRef.current.value.trim()) {
+      newErrors.pincode = "Pincode is required";
+    } else if (!/^\d{6}$/.test(pincodeRef.current.value.trim())) {
+      newErrors.pincode = "Pincode must be 6 digits";
+    }
+    if (!statusRef.current.value.trim()) newErrors.status = "Status is required";
+    if (!helpDateRef.current.value.trim()) newErrors.helpDate = "Help Date is required";
+    if (!galleryRef.current.value.trim()) newErrors.gallery = "Gallery is required";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const [galleryPreview, setGalleryPreview] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -61,6 +83,12 @@ function CreateHelp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (validateForm()) {
+      toast.success("Help request created successfully!");
+      navigate("/account/help");
+    } else {
+      toast.error("Please fix the errors!");
+    }
 
     const formData = new FormData();
     formData.append("title", titleRef.current.value);
@@ -114,6 +142,7 @@ function CreateHelp() {
                 className="w-full p-3 border border-gray-300 rounded-md focus:border-blue-500 outline-none"
                 placeholder={label}
               />
+              {errors[label.toLowerCase()] && <p className="text-red-500 text-sm">{errors[label.toLowerCase()]}</p>}
             </div>
           ))}
 
@@ -126,6 +155,7 @@ function CreateHelp() {
               required
               className="w-full p-3 border border-gray-300 rounded-md focus:border-blue-500 outline-none"
             />
+            {errors.helpDate && <p className="text-red-500 text-sm">{errors.helpDate}</p>}
           </div>
 
           {/* Category Dropdown */}
@@ -149,6 +179,7 @@ function CreateHelp() {
               </select>
               <FaChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
             </div>
+            {errors.category && <p className="text-red-500 text-sm">{errors.category}</p>}
           </div>
 
           {/* Image Upload (Full Width) */}
@@ -173,6 +204,7 @@ function CreateHelp() {
               <FiUpload className="text-blue-600 text-xl" /> {/* Upload Icon */}
               <span>Click to Upload</span>
             </label>
+            {errors.gallery && <p className="text-red-500 text-sm">{errors.gallery}</p>}
             {/* Image Preview with Remove Option */}
             <div className="flex flex-wrap mt-3 gap-3">
               {galleryPreview.map((src, index) => (
@@ -191,7 +223,7 @@ function CreateHelp() {
 
           {/* Submit Button (Full Width) */}
           <div className="col-span-2 text-center">
-            <button onClick={() => navigate("/account/help")} type="submit" className="w-full bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition">
+            <button  type="submit" className="w-full bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition">
               Create Help
             </button>
           </div>

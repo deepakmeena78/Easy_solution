@@ -1,13 +1,16 @@
 import { FaMapMarkerAlt, FaCalendarAlt, FaEdit, FaCheckCircle, FaTags } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function HelpCardComp({ help }) {
+    const navigate = useNavigate();
+
     console.log(help);
 
     return (
         <div className="flex flex-col sm:flex-row items-center border border-green-700 rounded-lg p-6 mb-6 transition-all hover:bg-gray-100 hover:shadow-md">
             {/* Help Image */}
             <div className="w-28 h-28 rounded-xl overflow-hidden border-2 border-gray-400">
-                <img  alt="Help Request" className="w-full h-full object-cover" />
+                <img alt="Help Request" className="w-full h-full object-cover" />
                 {console.log(help.gallery[0])}
             </div>
 
@@ -38,7 +41,7 @@ function HelpCardComp({ help }) {
 
                 {/* Buttons */}
                 <div className="mt-4 flex gap-3">
-                    <button className="flex items-center gap-2 px-5 py-2 text-sm border border-blue-500 text-blue-600 rounded-md transition-colors hover:bg-blue-100">
+                    <button onClick={() => navigate(`/create-help/`)} className="flex items-center gap-2 px-5 py-2 text-sm border border-blue-500 text-blue-600 rounded-md transition-colors hover:bg-blue-100">
                         <FaEdit /> Edit
                     </button>
                     <button className="flex items-center gap-2 px-5 py-2 text-sm border border-green-500 text-green-600 rounded-md transition-colors hover:bg-green-100">

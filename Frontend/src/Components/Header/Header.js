@@ -43,7 +43,7 @@ const Header = () => {
               />
             </Link>
           </div>
-         
+
           <SearchBar />
           <div>
           </div>
@@ -54,7 +54,7 @@ const Header = () => {
               className="block md:hidden focus:outline-none"
               aria-label="Toggle menu"
             >
-              
+
               <svg
                 className="w-8 h-8 text-gray-700"
                 xmlns="http://www.w3.org/2000/svg"
@@ -149,28 +149,28 @@ const Header = () => {
             Home
           </Link>
           <Link
-            to="/pages/aboutus"
-            className="text-gray-700 hover:text-relatedWhite border-2 border-transparent hover:bg-darkColor rounded-lg transition-all duration-300 ease-in-out px-4 py-1"
-          >
-            About Us
-          </Link>
-          <Link
-            to="/pages/category"
+            to="/category"
             className="text-gray-700 hover:text-relatedWhite border-2 border-transparent hover:bg-darkColor rounded-lg transition-all duration-300 ease-in-out px-4 py-1"
           >
             Category
           </Link>
           <Link
-            to="/pages/contactus"
-            className="text-gray-700 hover:text-relatedWhite border-2 border-transparent hover:bg-darkColor  rounded-lg transition-all duration-300 ease-in-out px-4 py-1"
+            to="/helpy"
+            className="text-gray-700 hover:text-relatedWhite border-2 border-transparent hover:bg-darkColor rounded-lg transition-all duration-300 ease-in-out px-4 py-1"
           >
-            Contact Us
+            Helps
           </Link>
           <Link
-            to="/pages/products"
+            to="/about"
             className="text-gray-700 hover:text-relatedWhite border-2 border-transparent hover:bg-darkColor  rounded-lg transition-all duration-300 ease-in-out px-4 py-1"
           >
-            Product 
+            About us
+          </Link>
+          <Link
+            to="/contact"
+            className="text-gray-700 hover:text-relatedWhite border-2 border-transparent hover:bg-darkColor  rounded-lg transition-all duration-300 ease-in-out px-4 py-1"
+          >
+            Contact us
           </Link>
 
           <div className="flex items-center ml-3">
