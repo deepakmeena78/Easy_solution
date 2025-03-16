@@ -4,12 +4,48 @@ import toast, { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { FaChevronDown, FaTimes } from "react-icons/fa";
 import { FiUpload } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 function CreateHelp() {
   const navigate = useNavigate();
   const [categoryData, setCategoryData] = useState([]);
+  const [initialData, setinitialData] = useState({});
+  const [isEditMode, setIsEditMode] = useState(false);
+  const { id } = useParams();
+
+  const FetchData = async () => {
+    try {
+      const response = await axios.get(`http://localhost:3200/help/find-help/${id}`);
+      console.log("Fetch Data", response.data);
+
+      if (response.status === 200) {
+        setinitialData(response.data.result || []);
+        if (response.data.result) {
+          titleRef.current.value = response.data.result.title || "";
+          descriptionRef.current.value = response.data.result.description || "";
+          categoryRef.current.value = response.data.result.category || "";
+          locationRef.current.value = response.data.result.location || "";
+          pincodeRef.current.value = response.data.result.pincode || "";
+          statusRef.current.value = response.data.result.status || "";
+          helpDateRef.current.value = response.data.result.help_date || "";
+        }
+        toast.success("Help requests fetched successfully!");
+      } else {
+        toast.error("Failed to fetch help requests!");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("An error occurred while fetching help requests.");
+    }
+  }
+
+  useEffect(() => {
+    if (id) {
+      FetchData();
+      setIsEditMode(true);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchCategory = async () => {
@@ -100,19 +136,27 @@ function CreateHelp() {
     formData.append("help_seeker", userId);
     formData.append("help_date", helpDateRef.current.value);
 
-    // Append files
     Array.from(galleryRef.current.files).forEach((file) => {
       formData.append("gallery", file);
     });
 
     try {
-      const response = await axios.post("http://localhost:3200/help/create-help", formData);
-
-      if (response.status === 200) {
-        setIsModalOpen(true);
-        toast.success("Help Created Successfully");
+      if (isEditMode) {
+        const response = await axios.post(`http://localhost:3200/help/update-help/${id}`, formData);
+        if (response.status === 200) {
+          setIsModalOpen(true);
+          toast.success("Help Edit Successfully");
+        } else {
+          toast.error("Help Edition Failed");
+        }
       } else {
-        toast.error("Help Creation Failed");
+        const response = await axios.post("http://localhost:3200/help/create-help", formData);
+        if (response.status === 200) {
+          setIsModalOpen(true);
+          toast.success("Help Created Successfully");
+        } else {
+          toast.error("Help Creation Failed");
+        }
       }
     } catch (error) {
       toast.error("Error occurred while creating help");
@@ -223,8 +267,8 @@ function CreateHelp() {
 
           {/* Submit Button (Full Width) */}
           <div className="col-span-2 text-center">
-            <button  type="submit" className="w-full bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition">
-              Create Help
+            <button type="submit" className="w-full bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition">
+              {isEditMode ? "Save Help" : "Create Help"}
             </button>
           </div>
         </form>

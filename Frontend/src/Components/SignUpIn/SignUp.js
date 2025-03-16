@@ -10,17 +10,14 @@ import OtpModal from "../Authentication/OtpModal";
 
 const SignUp = () => {
 
+  const [data, setData] = useState({});
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    mobile:'',
-  });
+
+  const [formData, setFormData] = useState({});
 
   const [errors, setErrors] = useState({});
-  
+
   const validate = (field, value) => {
     let errorMsg = "";
 
@@ -30,7 +27,7 @@ const SignUp = () => {
     if (field === "email" && (!value.includes("@") || !value.includes("."))) {
       errorMsg = "Enter a valid email!";
     }
-    if (field === "password" && (value.length < 6 || value.length > 10)) {
+    if (field === "password" && (value.length < 6 || value.length > 30)) {
       errorMsg = "Password must be 6-10 characters long!";
     }
     setErrors((prevErrors) => ({ ...prevErrors, [field]: errorMsg }));
@@ -65,12 +62,16 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = {
+    let formData = {
       name: nameRef.current.value,
       password: passwordRef.current.value,
       email: emailRef.current.value,
-      mobile:mobileRef.current.value,
+      mobile: mobileRef.current.value,
     };
+
+    const info = formData ? formData : data;
+    console.log("---------", info);
+
 
     Object.keys(formData).forEach((field) => validate(field, formData[field]));
 
@@ -160,7 +161,7 @@ const SignUp = () => {
                 Sign Up
               </button>
               <div className="mt-5 flex items-center justify-center">
-                <Google />
+                <Google setData={setData} />
               </div>
             </div>
             <div className="text-center mt-2">
@@ -184,5 +185,5 @@ const SignUp = () => {
   </>
   );
 };
- 
+
 export default SignUp;

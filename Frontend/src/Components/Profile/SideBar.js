@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FaBars, FaTimes, FaThLarge, FaUserCircle, FaHandsHelping, FaCrown, FaHistory, FaBell, FaHeadset } from "react-icons/fa";
+import { FaBars, FaTimes, FaThLarge, FaUserCircle, FaHandsHelping, FaHistory, FaBell, FaHeadset } from "react-icons/fa";
 
 const SliderProfile = () => {
     const location = useLocation();
@@ -10,7 +10,7 @@ const SliderProfile = () => {
         { to: "/acount/dashboard", icon: <FaThLarge />, label: "Dashboard" },
         { to: "/account/profile", icon: <FaUserCircle />, label: "Profile" },
         { to: "/account/help", icon: <FaHandsHelping />, label: "Your Help" },
-        { to: "/account/prime", icon: <FaCrown />, label: "Prime" },
+        // { to: "/account/prime", icon: <FaCrown />, label: "Prime" },
         { to: "/account/history", icon: <FaHistory />, label: "Help History" },
         { to: "/account/notifications", icon: <FaBell />, label: "Notification" },
         { to: "/account/support", icon: <FaHeadset />, label: "Support" }

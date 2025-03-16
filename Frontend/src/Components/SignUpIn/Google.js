@@ -1,34 +1,21 @@
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
-import axios from "axios";
 
-function Google() {
+function Google({ setData }) {
     const details = async (data) => {
         if (!data.email || !data.name || !data.sub) {
             console.error("Missing required fields:", data);
             return;
         }
-
         const loginInfo = {
             name: data.name,
             email: data.email,
             password: data.sub,
+            mobile: 999999999
         };
-        console.log(loginInfo);
-
 
         console.log("Sending data to backend:", loginInfo);
-
-        try {
-            const response = await axios.post(
-                "http://localhost:3200/customer/sign-up",
-                loginInfo,
-                { headers: { "Content-Type": "application/json" } }
-            );
-            console.log("Success:", response.data);
-        } catch (error) {
-            console.error("Error response:", error.response?.data || error.message);
-        }
+        setData(loginInfo);
     };
 
     return (

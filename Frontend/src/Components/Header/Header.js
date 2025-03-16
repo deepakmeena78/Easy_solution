@@ -13,9 +13,13 @@ const TOKEN_KEY = process.env.REACT_APP_COOKIE_PREFIX || "easy_solution";
 const Header = () => {
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch()
+ 
+ 
   useEffect(() => {
     const savedToken = Cookies.get(TOKEN_KEY);
     if (savedToken) {
+      console.log('============',);
+      
       dispatch(setUser(jwtDecode(savedToken)));
     }
   }, [dispatch]);

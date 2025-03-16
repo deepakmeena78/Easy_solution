@@ -19,7 +19,6 @@ export const CreateHelp = async (req, res) => {                               //
 
         const { title, description, help_seeker, category, location, pincode, status, help_date } = req.body;
         const gallery = req.files.map(file => file.path);
-
         const result = await HelpModule.create({ title, description, help_seeker, category, location, pincode, gallery, status, help_date });
 
         if (result) {
@@ -33,23 +32,27 @@ export const CreateHelp = async (req, res) => {                               //
 };
 
 
-
-export const FindHelp = async (req, res) => {                                    // Help Find BY Id 
+export const FindHelpById = async (req, res) => {
     try {
         let errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        const { id } = req.body;
-        const user = await HelpModule.findById(id);
-        if (user) {
-            return res.status(201).json({ msg: "You Can Change Help ", user })
+        const id = req.params.id;
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ msg: "Invalid Help ID" });
         }
-        return res.status(401).json({ msg: "Id Help Not Exist " });
+        const result = await HelpModule.findById(id);
+        if (!result) {
+            return res.status(404).json({ msg: "Help not Found" });
+        }
+        return res.status(200).json({ msg: "Help Data Successfully Fetched", result });
     } catch (error) {
+        console.error("Error fetching help:", error);
         return res.status(500).json({ msg: "ERROR FIND HELP", error });
-    }//==================== Find Help =================================
-}
+    }
+};
 
 
 
@@ -169,7 +172,6 @@ export const GetHelpBySeekerID = async (req, res) => {
         return res.status(500).json({ message: "Error fetching data", error });
     }
 };
-
 
 
 

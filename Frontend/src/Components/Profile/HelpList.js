@@ -64,7 +64,7 @@ function HelpList() {
                     </button>
                     <button
                         className="px-5 py-2 rounded-md font-semibold bg-green-500 text-white"
-                        onClick={() => navigate("/account/create-help")}
+                        onClick={() => navigate("/account/create-help/3")}
                     >
                         Create Help
                     </button>

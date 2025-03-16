@@ -57,7 +57,7 @@ const AllHelps = () => {
 
               <div className="w-1/4 flex justify-center">
                 <button style={{ boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}
-                  onClick={() => navigate(`/help-details${help._id}`)}
+                  onClick={() => navigate(`/help-details/${help._id}`)}
                   className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
                 >
                   View Details

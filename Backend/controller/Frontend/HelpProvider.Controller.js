@@ -21,18 +21,43 @@ import { Templete } from "../../Utils/templete.js";
 // };
 
 
+export const HelpRequest = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const result = await HelpProvider.find({ help_seeker: id })
+            .populate("help")
+            .populate("offerd_by");
+
+        if (!result || result.length === 0) {
+            return res.status(404).json({ msg: "No help requests found for this seeker ID." });
+        }
+        return res.status(200).json({ msg: "Data fetched successfully", result });
+    } catch (error) {
+        console.error("ERROR:", error);
+        return res.status(500).json({ msg: "Server error", error: error.message });
+    }
+}
+
 
 export const Create = async (req, res) => {
     try {
         const { help, help_seeker, offerd_by } = req.body;
+        console.log(help, help_seeker, offerd_by);
+
+        const existingApplication = await HelpProvider.findOne({ help, offerd_by });
+
+        if (existingApplication) {
+            return res.status(400).json({ msg: "You have already applied for this help" });
+        }
 
         let apply = await HelpProvider.create({ help, help_seeker, offerd_by });
-        return res.status(201).json({ msg: "Successflly Apply", apply });
+        return res.status(201).json({ msg: "Successfully Applied", apply });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ msg: "ERROR Help Provider", error });
     }
-}
+};
+
 
 
 
