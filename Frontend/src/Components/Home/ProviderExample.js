@@ -17,7 +17,7 @@ const ProviderExample = () => {
         console.log("Server Response:", response.data);
 
         if (response.data) {
-          setProvide(response.data.result);
+          setProvide(response.data.result.slice(0, 4));
           toast.success("Good Yaar successfully!");
         } else {
           setProvide([]); // Ensure state is updated

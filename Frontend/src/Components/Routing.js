@@ -16,6 +16,7 @@ import SidebarComp from "./Profile/SideBarComp";
 import CreateHelp from "./Profile/CreateHelp";
 import HelpHistory from "./Profile/HelpHistory";
 import HelpDetails from "./Help/HelpDetails";
+import AboutUs from "./Home/AboutUs";
 
 const Routing = () => {
   return (
@@ -27,6 +28,7 @@ const Routing = () => {
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/login" element={<SignIn />} />
       <Route path="/category" element={<CategoryPage />} />
+      <Route path="/about" element={<AboutUs />} />
       <Route path="help-details/:id" element={<HelpDetails />} />        {/*Sequere*/}
       <Route
         path="/account/*"

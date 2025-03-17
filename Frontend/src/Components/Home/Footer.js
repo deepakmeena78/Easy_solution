@@ -65,7 +65,7 @@ const Footer = () => {
                 </div>
                 <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
                 <div className="sm:flex sm:items-center sm:justify-between">
-                    <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <img src="/Images/logo.png" alt="Flowbite Logo" className="inline h-6 w-auto" /> Flowbi. All Rights Reserved.
+                    <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <img src="/Images/logo.png" alt="Flowbite Logo" className="inline h-6 w-auto" /> Easy Solution. All Rights Reserved.
                     </span>
                     <div className="flex mt-4 sm:justify-center sm:mt-0">
                         <a href="https://facebook.com" className="text-white hover:text-[var(--mid-blue)] dark:hover:text-[var(--mid-blue)]">
@@ -80,7 +80,7 @@ const Footer = () => {
                             </svg>
                             <span className="sr-only">WhatsApp</span>
                         </a>
-                        <a href="https://www.linkedin.com/in/your-profile" className="text-white hover:text-[var(--mid-blue)] dark:hover:text-[var(--mid-blue)] ms-5">
+                        <a href="https://www.linkedin.com/in/deepakmeena78" className="text-white hover:text-[var(--mid-blue)] dark:hover:text-[var(--mid-blue)] ms-5">
                             <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M20.451 20.452h-3.897v-5.873c0-1.398-.027-3.199-1.952-3.199-1.954 0-2.253 1.526-2.253 3.1v5.972H8.451V9h3.739v1.561h.054c.522-.988 1.798-2.03 3.705-2.03 3.966 0 4.693 2.611 4.693 6.011v5.91zM5.337 7.433c-1.253 0-2.27-1.017-2.27-2.27s1.017-2.271 2.27-2.271c1.254 0 2.27 1.018 2.27 2.271s-1.017 2.27-2.27 2.27zM7.285 20.452h-3.897V9h3.897v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.226.792 24 1.771 24h20.453C23.207 24 24 23.226 24 22.271V1.729C24 .774 23.207 0 22.225 0z" />
                             </svg>
