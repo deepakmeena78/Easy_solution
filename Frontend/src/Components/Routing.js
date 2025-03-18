@@ -17,6 +17,7 @@ import CreateHelp from "./Profile/CreateHelp";
 import HelpHistory from "./Profile/HelpHistory";
 import HelpDetails from "./Help/HelpDetails";
 import AboutUs from "./Home/AboutUs";
+import ContactUs from "./contact/contactus";
 
 const Routing = () => {
   return (
@@ -29,7 +30,8 @@ const Routing = () => {
       <Route path="/login" element={<SignIn />} />
       <Route path="/category" element={<CategoryPage />} />
       <Route path="/about" element={<AboutUs />} />
-      <Route path="help-details/:id" element={<HelpDetails />} />        {/*Sequere*/}
+      <Route path="help-details/:id" element={<HelpDetails />} />      
+      <Route path="contact" element={<ContactUs/>} />      
       <Route
         path="/account/*"
         element={
@@ -42,7 +44,7 @@ const Routing = () => {
               <Route path="create-help/:id" element={<ProtectedRoute element={<CreateHelp />} />} />
               <Route path="create-help" element={<ProtectedRoute element={<CreateHelp />} />} />
               <Route path="history" element={<ProtectedRoute element={<HelpHistory />} />} />
-              <Route path="notifications" element={<Notification />} />  {/*Sequere*/}
+              <Route path="notifications" element={<Notification />} />
             </Routes>
           </SidebarComp>
         }
