@@ -62,11 +62,10 @@ export const UpdateHelp = async (req, res) => {
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-
         const id = req.params.id;
-        let { title, description, category, location, pincode, help_date, oldImages } = req.body;
+        let { title, description, category, location, pincode, help_date, oldImages,status } = req.body;
 
-        console.log("Received oldImages:", oldImages);
+        console.log("Received oldImages:", status);
 
         // ✅ **Convert oldImages from string to array & Fix Path Slashes**
         if (typeof oldImages === "string") {
@@ -119,6 +118,7 @@ export const UpdateHelp = async (req, res) => {
 
         // 🔥 **Step 2: Update Database with New Images**
         helpItem.set({
+            status,
             title,
             description,
             category,
@@ -141,7 +141,15 @@ export const UpdateHelp = async (req, res) => {
 
 export const GetHelps = async (req, res) => {
     try {
-        let result = await HelpModule.find({});
+
+        // console.log('||||||||||||||||||||>>>',req.params.id);
+        
+       const  userId = req.params.id;
+      
+       const result = await HelpModule.find({
+        help_seeker: { $ne: userId }
+      }) 
+      .populate("category")
         if (!result) {
             return res.status(404).json({ Err: "Data Is Not available" });
         }

@@ -93,6 +93,7 @@ function CreateHelp() {
     } else if (!/^\d{6}$/.test(pincodeRef.current.value.trim())) {
       newErrors.pincode = "Pincode must be 6 digits";
     }
+    if (!statusRef.current.value.trim()) newErrors.status = "Status is required";
     if (!helpDateRef.current.value.trim()) newErrors.helpDate = "Help Date is required";
     if (!galleryRef.current.value.trim()) newErrors.gallery = "Gallery is required";
 
@@ -131,7 +132,7 @@ function CreateHelp() {
     formData.append("category", categoryRef.current.value);
     formData.append("location", locationRef.current.value);
     formData.append("pincode", pincodeRef.current.value);
-
+    formData.append("status", statusRef.current.value);
     formData.append("help_seeker", userId);
     formData.append("help_date", helpDateRef.current.value);
 
@@ -173,6 +174,7 @@ function CreateHelp() {
             { label: "Description", ref: descriptionRef },
             { label: "Location", ref: locationRef },
             { label: "Pincode", ref: pincodeRef },
+            { label: "Status", ref: statusRef },
           ].map(({ label, ref }) => (
             <div key={label} className="w-full">
               <label className="text-gray-600 font-medium">{label}</label>
