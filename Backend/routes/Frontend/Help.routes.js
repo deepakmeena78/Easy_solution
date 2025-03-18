@@ -15,7 +15,7 @@ route.post("/create-help", upload.array("gallery", 5),                          
     CreateHelp);
 
 
-route.get("/get-help", GetHelps);
+route.get("/get-help/:id", GetHelps);
 
 
 route.get("/get-seekerhelp/:seekerId", GetHelpBySeekerID);

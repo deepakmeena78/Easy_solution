@@ -38,6 +38,7 @@ const Routing = () => {
               <Route path="help" element={<ProtectedRoute element={<HelpList />} />} />
               {/* <Route path="prime" element={<ProtectedRoute element={<Prime />} />} /> */}
               <Route path="create-help/:id" element={<ProtectedRoute element={<CreateHelp />} />} />
+              <Route path="create-help" element={<ProtectedRoute element={<CreateHelp />} />} />
               <Route path="history" element={<ProtectedRoute element={<HelpHistory />} />} />
               <Route path="notifications" element={<Notification />} />  {/*Sequere*/}
             </Routes>
